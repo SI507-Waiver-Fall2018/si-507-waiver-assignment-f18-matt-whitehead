@@ -3,6 +3,7 @@ import tweepy
 import nltk
 import json #don't think I need this, but ¯\_(ツ)_/¯. maybe UMSI people are used to dealing with json instead of tweepy classes?
 import sys
+import csv #ok to add additional import?
 
 # write your code here
 # usage should be python3 part1.py <username> <num_tweets>
@@ -65,7 +66,6 @@ popular_verbs = pop_contest(verb_counts)
 popular_adjs = pop_contest(adj_counts)
 
 #Write to csv
-import csv
 with open("noun_data.csv", "w") as csv_file:
     csv_out = csv.writer(csv_file)
     csv_out.writerow(['Noun', 'Number'])
