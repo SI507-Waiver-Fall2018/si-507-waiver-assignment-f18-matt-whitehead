@@ -70,3 +70,18 @@ with open("noun_data.csv", "w") as csv_file:
     csv_out.writerows(popular_nouns[0:5])
 
 #Print out everything
+def print_words(word_list):
+    for w,c in word_list[0:5]:
+        print(w + "(" + str(c) + ")", end=" ")
+    return None
+print("USER: ", arg_user)
+print("TWEETS ANALYZED: ", num_analyzed)
+print("VERBS: ", end=" ")
+print_words(popular_verbs)
+print("\nNOUNS: ", end=" ")
+print_words(popular_nouns)
+print("\nADJECTIVES: ", end=" ")
+print_words(popular_adjs)
+print("\nORIGINAL TWEETS: ", og_tweet_count)
+print("TIMES FAVORITED (ORIGINAL TWEETS ONLY): ", fav_count)
+print("TIMES RETWEETED (ORIGINAL TWEETS ONLY): ", rt_count)
