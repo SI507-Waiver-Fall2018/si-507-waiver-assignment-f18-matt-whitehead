@@ -38,9 +38,9 @@ for i in range(0, len(all_tweets)):
 raw_list = raw_text_data.split()
 abc_list = list("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") #gross work around since I can't use regex for this or string.ascii_lowercase
 filtered_list = list(filter(lambda x: x[0] in abc_list and 'http' not in x and x != 'RT', raw_list))
+filtered_string = " ".join(filtered_list)
 
 #POS tagging
-filtered_string = " ".join(filtered_list)
 tokens = nltk.word_tokenize(filtered_string)
 tags = nltk.pos_tag(tokens)
 nouns_list = []
@@ -53,7 +53,13 @@ for k,v in tags:
         verbs_list.append(k)
     elif v[0:2] == "JJ":
         adj_list.append(k)
-nouns_list = list(filter(lambda x: x != "’", nouns_list)) #nltk keeps tagging ’ as a noun
+def cleanList(pos_list):
+    cleaned_list = list(filter(lambda x: x[0] in abc_list and len(x) != 1, pos_list))
+    return cleaned_list
+nouns_list = cleanList(nouns_list)
+verbs_list = cleanList(verbs_list)
+adj_list = cleanList(adj_list)
+
 
 #Calculate all the NLP counts
 noun_counts = {x:nouns_list.count(x) for x in nouns_list}
