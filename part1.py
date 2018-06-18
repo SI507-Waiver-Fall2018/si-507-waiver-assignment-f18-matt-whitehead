@@ -58,10 +58,15 @@ nouns_list = list(filter(lambda x: x != "’", nouns_list)) #nltk keeps tagging 
 noun_counts = {x:nouns_list.count(x) for x in nouns_list}
 verb_counts = {x:verbs_list.count(x) for x in verbs_list}
 adj_counts = {x:adj_list.count(x) for x in adj_list}
-popular_nouns = sorted(noun_counts, key = lambda x: (-noun_counts[x], x))
-popular_verbs = sorted(verb_counts, key = lambda x: (-verb_counts[x], x))
-popular_adjs = sorted(adj_counts, key = lambda x: (-adj_counts[x], x))
+popular_nouns = sorted(noun_counts.items(), key = lambda x: (-x[1],x[0]))
+popular_verbs = sorted(verb_counts.items(), key = lambda x: (-x[1],x[0]))
+popular_adjs = sorted(adj_counts.items(), key = lambda x: (-x[1],x[0]))
 
 #Write to csv
+import csv
+with open("noun_data.csv", "w") as csv_file:
+    csv_out = csv.writer(csv_file)
+    csv_out.writerow(['Noun', 'Number'])
+    csv_out.writerows(popular_nouns[0:5])
 
 #Print out everything
